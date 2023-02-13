@@ -23,6 +23,9 @@ export default function Home() {
       </div>
       <div className="px-8">
         Contribute to the New Zealand Major Cities Risk Pool today!
+        
+        Current contract address: 0x6C1Ca71E779538631801E308d852f83aAd882021
+        
         <Deposit />
       </div>
     </div>
