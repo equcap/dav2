@@ -15,6 +15,7 @@ import {
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 import axios from "axios";
+import annotationPlugin from "chartjs-plugin-annotation";
 
 ChartJS.register(
   ArcElement,
@@ -27,10 +28,11 @@ ChartJS.register(
   Legend,
   Filler,
   BarController,
-  BarElement
+  BarElement,
+  annotationPlugin
 );
 
-export default function WelData() {
+export default function DataWel() {
   const [chartData, setChartData] = useState(null);
 
   // to need add exception if month = 0, then do year - 1
@@ -39,7 +41,7 @@ export default function WelData() {
 
   const month = (current.getMonth() + 1).toString().padStart(2, "0");
   const day = current.getDate().toString().padStart(2, "0");
-  const date = `${current.getFullYear()}-${month}-${day}`;
+  const date = `${current.getFullYear()}-${month}-${day - 1}`;
 
   const earlierMonth = current.getMonth().toString().padStart(2, "0");
   const earlierDay = current.getDate().toString().padStart(2, "0");
@@ -78,6 +80,12 @@ export default function WelData() {
         <Bar
           options={{
             responsive: true,
+            scales: {
+              y: {
+                min: 0,
+                max: 200,
+              },
+            },
             plugins: {
               legend: {
                 position: "top",
@@ -85,6 +93,23 @@ export default function WelData() {
               title: {
                 display: true,
                 text: "Wellington Rainfall (Past Month)",
+              },
+              annotation: {
+                annotations: [
+                  {
+                    type: "line",
+                    mode: "horizontal",
+                    scaleID: "y",
+                    value: 150,
+                    borderColor: "red",
+                    borderWidth: 2,
+                    label: {
+                      backgroundColor: "black",
+                      content: "Threshold set in smart contract",
+                      enabled: true,
+                    },
+                  },
+                ],
               },
             },
           }}

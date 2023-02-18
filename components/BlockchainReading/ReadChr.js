@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useWeb3Contract } from "react-moralis";
-import { abi } from "../constants/abi.js";
-import { contractAddress } from "../constants/contractAddress.js";
+import { abi } from "../../constants/abi.js";
+import { contractAddress } from "../../constants/contractAddress.js";
 import { useMoralis } from "react-moralis";
 
-export default function Chr() {
+export default function ReadChr() {
   const { isWeb3Enabled } = useMoralis();
   const { runContractFunction: Chr24 } = useWeb3Contract({
     abi: abi,

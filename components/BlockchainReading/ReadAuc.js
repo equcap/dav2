@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useWeb3Contract } from "react-moralis";
-import { abi } from "../constants/abi.js";
-import { contractAddress } from "../constants/contractAddress.js";
+import { abi } from "../../constants/abi.js";
+import { contractAddress } from "../../constants/contractAddress.js";
 import { useMoralis } from "react-moralis";
 
-export default function Auc() {
+export default function ReadAuc() {
   const { isWeb3Enabled } = useMoralis();
   const { runContractFunction: Auc24 } = useWeb3Contract({
     abi: abi,
@@ -28,7 +28,7 @@ export default function Auc() {
       //need asynic to wait to update UI
       async function updateUI() {
         const Auc24FromCall = (await Auc24()).toString();
-        setAuc24fromContract(Auc24FromCall / 100);
+        setAuc24fromContract(Auc24FromCall);
         console.log(Auc24fromContract);
       }
       updateUI();
@@ -37,7 +37,7 @@ export default function Auc() {
 
   return (
     <div className="text-black font-bold py-2 ml-auto">
-      Current Auckland reading stored on blockchain: {Auc24fromContract}mm
+      Current Auckland reading stored on blockchain: {Auc24fromContract / 100}mm
     </div>
   );
 }

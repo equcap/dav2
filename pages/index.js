@@ -2,6 +2,11 @@ import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import { useMoralis } from "react-moralis";
 
+import AmountAuc from "../components/AmountDeposited/AmountAuc";
+import AmountWel from "../components/AmountDeposited/AmountWel";
+import AmountChr from "../components/AmountDeposited/AmountChr";
+import AmountPot from "../components/AmountDeposited/AmountPot";
+
 import Deposit from "../components/Deposit";
 
 export default function Home() {
@@ -22,11 +27,40 @@ export default function Home() {
         such as shelter.
       </div>
       <div className="px-8">
-        Contribute to the New Zealand Major Cities Risk Pool today!
-        
-        Current contract address: 0x6C1Ca71E779538631801E308d852f83aAd882021
-        
+        Contribute to the New Zealand Major Cities Risk Pool today! Current
+        contract address on Goerli testnet:{" "}
+        <a
+          href="https://goerli.etherscan.io/address/0x230b5194441489aeeCe973b0036889b473b71245"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          0x230b5194441489aeeCe973b0036889b473b71245
+        </a>
         <Deposit />
+      </div>
+      <div className="text-black font-bold py-2 px-12">
+        Amount Deposited to Auckland Wallet: <AmountAuc />
+        ETH
+      </div>
+      <div className="text-black font-bold py-2 px-12">
+        Amount Deposited to Wellington Wallet: <AmountWel />
+        ETH
+      </div>
+      <div className="text-black font-bold py-2 px-12">
+        Amount Deposited to Christchurch Wallet: <AmountChr />
+        ETH
+      </div>
+      <div className="text-black font-bold py-2 px-12">
+        Amount Deposited to Pot: <AmountPot />
+        ETH
+      </div>
+      <div className="text-black font-bold py-2 px-12">
+        Total Amount Deposited to the New Zealand Major Cities Risk Pool:{" "}
+        {Number(<AmountAuc />) +
+          Number(<AmountWel />) +
+          Number(<AmountChr />) +
+          Number(<AmountPot />)}
+        ETH
       </div>
     </div>
   );

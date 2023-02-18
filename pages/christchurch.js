@@ -1,17 +1,22 @@
-import ReqChr from "../components/ReqChr";
-import Chr from "../components/Chr";
-import ChrData from "../components/ChrData";
+import ReqChr from "../components/ReqUpdate/ReqChr";
+import ReadChr from "../components/BlockchainReading/ReadChr";
+import DataChr from "../components/BarCharts/DataChr";
+import AmountChr from "../components/AmountDeposited/AmountChr";
 
 import Withdraw from "../components/Withdraw";
 
-export default function Chistchurch() {
+export default function Christchurch() {
   return (
     <div className="flex h-full flex-col">
       <div className="py-2 px-12">
-        <ChrData />
+        <DataChr />
+      </div>
+      <div className="text-black font-bold py-2 px-12">
+        Amount Deposited to Christchurch Wallet: <AmountChr />
+        ETH
       </div>
       <div className="py-2 px-12">
-        <Chr />
+        <ReadChr />
         <ReqChr />
       </div>
       <div className="py-2 px-12">

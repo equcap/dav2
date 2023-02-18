@@ -1,6 +1,6 @@
 import { useWeb3Contract } from "react-moralis";
-import { abi } from "../constants/abi.js";
-import { contractAddress } from "../constants/contractAddress.js";
+import { abi } from "../../constants/abi.js";
+import { contractAddress } from "../../constants/contractAddress.js";
 
 export default function ReqWel() {
   const { runContractFunction: RequestWellington } = useWeb3Contract({

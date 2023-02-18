@@ -15,6 +15,7 @@ import {
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 import axios from "axios";
+import annotationPlugin from "chartjs-plugin-annotation";
 
 ChartJS.register(
   ArcElement,
@@ -27,10 +28,11 @@ ChartJS.register(
   Legend,
   Filler,
   BarController,
-  BarElement
+  BarElement,
+  annotationPlugin
 );
 
-export default function AucData() {
+export default function DataChr() {
   const [chartData, setChartData] = useState(null);
 
   // to need add exception if month = 0, then do year - 1
@@ -39,7 +41,7 @@ export default function AucData() {
 
   const month = (current.getMonth() + 1).toString().padStart(2, "0");
   const day = current.getDate().toString().padStart(2, "0");
-  const date = `${current.getFullYear()}-${month}-${day}`;
+  const date = `${current.getFullYear()}-${month}-${day - 1}`;
 
   const earlierMonth = current.getMonth().toString().padStart(2, "0");
   const earlierDay = current.getDate().toString().padStart(2, "0");
@@ -48,7 +50,7 @@ export default function AucData() {
   useEffect(() => {
     const setData = async () => {
       let apiurl =
-        "https://archive-api.open-meteo.com/v1/archive?latitude=-36.85&longitude=174.76&start_date=" +
+        "https://archive-api.open-meteo.com/v1/archive?latitude=-43.53&longitude=172.63&start_date=" +
         earlierDate +
         "&end_date=" +
         date +
@@ -78,13 +80,36 @@ export default function AucData() {
         <Bar
           options={{
             responsive: true,
+            scales: {
+              y: {
+                min: 0,
+                max: 200,
+              },
+            },
             plugins: {
               legend: {
                 position: "top",
               },
               title: {
                 display: true,
-                text: "Auckland Rainfall (Past Month)",
+                text: "Christchurch Rainfall (Past Month)",
+              },
+              annotation: {
+                annotations: [
+                  {
+                    type: "line",
+                    mode: "horizontal",
+                    scaleID: "y",
+                    value: 150,
+                    borderColor: "red",
+                    borderWidth: 2,
+                    label: {
+                      backgroundColor: "black",
+                      content: "Threshold set in smart contract",
+                      enabled: true,
+                    },
+                  },
+                ],
               },
             },
           }}
